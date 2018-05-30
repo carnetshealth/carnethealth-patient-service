@@ -1,6 +1,5 @@
 package com.carnethealth.patient.services;
 
-import java.util.List;
 import java.util.Optional;
 
 import javax.transaction.Transactional;
@@ -10,22 +9,14 @@ import org.springframework.stereotype.Service;
 
 import com.carnethealth.patient.model.Patient;
 import com.carnethealth.patient.repository.PatientRepository;
-import com.carnethealth.patient.repository.PatientRepositoryString;
 
 @Service
 @Transactional
 public class PatientService {
 	
 	
-	//private PatientRepositoryString patientRepositoryString;
-	
 	@Autowired
 	private PatientRepository patientRepository;
-	
-	/*@Autowired
-	public PatientService (PatientRepositoryString patientRepositoryString) {
-		this.patientRepositoryString = patientRepositoryString;
-	}*/
 	
 	public Patient createPatient(Patient patient) {
 		return patientRepository.save(patient);

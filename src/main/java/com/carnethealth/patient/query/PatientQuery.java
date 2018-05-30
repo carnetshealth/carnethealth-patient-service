@@ -16,8 +16,7 @@ import io.leangen.graphql.annotations.GraphQLQuery;
 
 @Component
 public class PatientQuery {
-	
-	List<Patient> mockPatient;
+
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	@Autowired
 	PatientService patientService ;
@@ -33,12 +32,7 @@ public class PatientQuery {
      * @return
      */
     @GraphQLQuery(name = "patientBycarnetId")
-    public Patient getPatient(@GraphQLArgument(name = "carnetId") String carnetId){
-    	
-    	System.out.println(" *************************** "+ carnetId +" *************************** ");
-    	logger.info("Patient id 10001 -> {}", patientService.getPatientByCarnetId(carnetId));
-    	System.out.println(" *************************** "+ carnetId +" *************************** ");
-    	
+    public Patient getPatient(@GraphQLArgument(name = "carnetId") String carnetId){    	
       // final Optional<Patient> searchResult = this.mockPatient.stream()
       //          .filter(patient -> patient.getCarnet_id().equals(carnetId))
        //         .findFirst();        

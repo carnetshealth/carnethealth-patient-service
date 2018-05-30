@@ -1,6 +1,5 @@
 package com.carnethealth.patient.services;
 
-import java.util.List;
 import java.util.Optional;
 
 import javax.transaction.Transactional;
@@ -17,11 +16,15 @@ public class AddressService {
 	@Autowired
 	private AddressRepository addressRepository;
 	
+	public Address getPatientAddressByCarnetId(String carnetId) {
+		return addressRepository.findAllByCarnetId(carnetId);
+	}
+	
 	public Address createAddress(Address address) {
 		return addressRepository.save(address);
 	}
 	
-	public List<Address> geAllAddress(){
+	public Iterable<Address> geAllAddress(){
         return addressRepository.findAll();
     }
     

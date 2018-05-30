@@ -29,20 +29,12 @@ public class CarnetHealthPatientApplication extends SpringBootServletInitializer
 	@Autowired
 	PatientService patientService ;
 	
-	//PatientService patientService = new PatientService();
 	
 	Patient patient = new Patient();
 
 	public static void main(String[] args) {
 		SpringApplication.run(CarnetHealthPatientApplication.class, args);
 	}
-	
-	/*@Bean   
-	public ServletRegistrationBean h2servletRegistration() {        
-	        ServletRegistrationBean registrationBean = new ServletRegistrationBean(new WebServlet());       
-	        registrationBean.addUrlMappings("/console/*");      
-	        return registrationBean;    
-	}*/ 
 	
 	@Bean
 	public ServletRegistrationBean h2WebConsole() {
@@ -60,7 +52,6 @@ public class CarnetHealthPatientApplication extends SpringBootServletInitializer
     }
 	@Override
 	public void run(String... args) throws Exception {
-		Patient patient = new Patient();
 		logger.info("Inserting -> {}", patientRepository.save(
 				new Patient(
 						"PT00100CM", 
@@ -73,9 +64,8 @@ public class CarnetHealthPatientApplication extends SpringBootServletInitializer
 						"ACTIF")));
 		String carnetId ="PT00100CM";
 		
-		System.out.println(" *************************** "+ carnetId +" *************************** ");
-		//patient =patientRepository.findAllByCarnetId(carnetId); 
+		System.out.println(" *************************** "+ "carnetId" +" *************************** ");
     	logger.info("Patient -> {}", patientRepository.findAllByCarnetId(carnetId));
-    	System.out.println(" *************************** "+ carnetId +" *************************** ");
+		System.out.println(" *************************** "+ "carnetId" +" *************************** ");
 	} 
 }

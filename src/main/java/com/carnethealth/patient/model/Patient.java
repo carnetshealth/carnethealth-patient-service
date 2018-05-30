@@ -8,11 +8,13 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -42,11 +44,17 @@ public class Patient implements Serializable{
 	private Date registration_date;
 	
 	private String patient_status;
-	//private PasswordRecovery passwordRecovery;
-	//private LoginCredentials loginCredentials;
+	
+	@OneToOne(mappedBy = "patient", cascade = CascadeType.ALL, 
+            fetch = FetchType.LAZY, optional = false)
+	private PasswordRecovery passwordRecovery;
+	
+	@OneToOne(mappedBy = "patient", cascade = CascadeType.ALL, 
+            fetch = FetchType.LAZY, optional = false)
+	private LoginCredentials loginCredentials;
 	
 	@OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "carnetId", referencedColumnName = "carnetId")
+    @JoinColumn(name = "carnetId", referencedColumnName = "carnetId" )
 	private List<Address> address;
 	
 	@OneToMany(cascade = CascadeType.ALL)
@@ -126,7 +134,7 @@ public class Patient implements Serializable{
 		this.registration_date = registration_date;
 		this.patient_status = patient_status;
 		this.address = address;
-        //this.emergencyContacts = emergencyContacts;
+        this.emergencyContacts = emergencyContacts;
 	}
 	
 	public Patient(String carnetId, String firstName, String lastName, String email, Date birthdate,
@@ -456,7 +464,7 @@ public class Patient implements Serializable{
 
 	
 
-	/*@GraphQLQuery(name = "emergencyContacts")
+	@GraphQLQuery(name = "emergencyContacts")
 	public List<EmergencyContacts> getEmergencyContacts() {
 		return emergencyContacts;
 	}
@@ -477,7 +485,6 @@ public class Patient implements Serializable{
 		this.passwordRecovery = passwordRecovery;
 	}
 
-
 	@GraphQLQuery(name = "loginCredentials")
 	public LoginCredentials getLoginCredentials() {
 		return loginCredentials;
@@ -485,7 +492,7 @@ public class Patient implements Serializable{
 
 	public void setLoginCredentials(LoginCredentials loginCredentials) {
 		this.loginCredentials = loginCredentials;
-	}*/
+	}
 	
 	
 }

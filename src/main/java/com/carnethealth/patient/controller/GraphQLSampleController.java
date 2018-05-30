@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.carnethealth.patient.query.AddressQuery;
 import com.carnethealth.patient.query.PatientQuery;
 
 import graphql.ExecutionInput;
@@ -31,7 +32,7 @@ public class GraphQLSampleController {
     private final GraphQL graphQL;
 
     @Autowired
-    public GraphQLSampleController(PatientQuery patientQuery) {
+    public GraphQLSampleController(PatientQuery patientQuery,AddressQuery addressQuery) {
 
         //Schema generated from query classes
         GraphQLSchema schema = new GraphQLSchemaGenerator()
@@ -41,6 +42,7 @@ public class GraphQLSampleController {
                         //Resolve public methods inside root package
                         new PublicResolverBuilder("com.carnethealth.patient"))
                 .withOperationsFromSingleton(patientQuery)
+                .withOperationsFromSingleton(addressQuery)
                 .withValueMapperFactory(new JacksonValueMapperFactory())
                 .generate();
         graphQL = GraphQL.newGraphQL(schema).build();

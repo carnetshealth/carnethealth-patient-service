@@ -3,9 +3,12 @@ package com.carnethealth.patient.model;
 import java.io.Serializable;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 
 import io.leangen.graphql.annotations.GraphQLQuery;
 
@@ -16,6 +19,7 @@ public class PasswordRecovery implements Serializable{
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	
+
 	private String carnetId;
 	private String secret_pin;
 	private String questions_1;
@@ -23,6 +27,11 @@ public class PasswordRecovery implements Serializable{
 	private String questions_3;
 	private String questions_4;
 	private String questions_5;
+	
+
+	@OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "patient_carnetId")
+	private Patient patient;
 	
 	PasswordRecovery(){}
 
@@ -39,6 +48,20 @@ public class PasswordRecovery implements Serializable{
 	}
 	
 	
+
+	/**
+	 * @return the patient
+	 */
+	public Patient getPatient() {
+		return patient;
+	}
+
+	/**
+	 * @param patient the patient to set
+	 */
+	public void setPatient(Patient patient) {
+		this.patient = patient;
+	}
 
 	/**
 	 * @return the id
@@ -159,6 +182,8 @@ public class PasswordRecovery implements Serializable{
 	public void setQuestions_5(String questions_5) {
 		this.questions_5 = questions_5;
 	}
+	
+
 
 	/* (non-Javadoc)
 	 * @see java.lang.Object#hashCode()

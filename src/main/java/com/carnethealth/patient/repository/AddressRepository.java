@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 import com.carnethealth.patient.model.Address;
 
 @Repository
-public interface AddressRepository extends JpaRepository<Address, Long>{
-
+public interface AddressRepository extends JpaRepository <Address, Long>{
+	
+	Address findAllByCarnetId(String first);
 }
