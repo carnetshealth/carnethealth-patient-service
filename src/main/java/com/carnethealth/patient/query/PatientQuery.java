@@ -12,6 +12,7 @@ import com.carnethealth.patient.model.Patient;
 import com.carnethealth.patient.services.PatientService;
 
 import io.leangen.graphql.annotations.GraphQLArgument;
+import io.leangen.graphql.annotations.GraphQLMutation;
 import io.leangen.graphql.annotations.GraphQLQuery;
 
 @Component
@@ -39,5 +40,11 @@ public class PatientQuery {
       //  return searchResult.orElseThrow(()->new RuntimeException("Patient not found"));
     	return patientService.getPatientByCarnetId(carnetId);
     }
+    
+    @GraphQLMutation(name = "createPatient")
+    public Patient createPatient(@GraphQLArgument(name = "carnetId") Patient patient){    
+      	
+    	return patientService.createPatient(patient);
+      }
 
 }
