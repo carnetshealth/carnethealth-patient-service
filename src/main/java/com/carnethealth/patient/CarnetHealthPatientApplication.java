@@ -14,9 +14,10 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import com.carnethealth.patient.carnetid.CnHoldersType;
 import com.carnethealth.patient.model.Patient;
+import com.carnethealth.patient.repository.CnHoldersTypeRepository;
 import com.carnethealth.patient.repository.PatientRepository;
-import com.carnethealth.patient.services.PatientService;
 
 @SpringBootApplication
 public class CarnetHealthPatientApplication extends SpringBootServletInitializer implements CommandLineRunner{
@@ -27,7 +28,7 @@ public class CarnetHealthPatientApplication extends SpringBootServletInitializer
 	PatientRepository patientRepository;
 	
 	@Autowired
-	PatientService patientService ;
+	CnHoldersTypeRepository cnHoldersTypeRepository ;
 	
 	
 	Patient patient = new Patient();
@@ -53,19 +54,13 @@ public class CarnetHealthPatientApplication extends SpringBootServletInitializer
 	@Override
 	public void run(String... args) throws Exception {
 		logger.info("Inserting -> {}", patientRepository.save(
-				new Patient(
-						"PT00100CM", 
-						"PIERRE", 
-						"FOKAM",  
-						"PIERRE@GMAIL.COM", 
-						"207 780 2347", 
-						"CM1009283", 
-						"CM2390183", 
-						"ACTIF")));
-		String carnetId ="PT00100CM";
+				new Patient("PT00100CM", "PIERRE","FOKAM","PIERRE@GMAIL.COM","207 780 2347","CM1009283","CM2390183","ACTIF")));
+		logger.info("Inserting -> {}", cnHoldersTypeRepository.save(
+				new CnHoldersType("PTE","PATIENT")));
+		logger.info("Inserting -> {}", cnHoldersTypeRepository.save(
+				new CnHoldersType("PRO","PROVIDER")));
+		logger.info("Inserting -> {}", cnHoldersTypeRepository.save(
+				new CnHoldersType("INS","INSTITUTIONS")));
 		
-		System.out.println(" *************************** "+ "carnetId" +" *************************** ");
-    	logger.info("Patient -> {}", patientRepository.findAllByCarnetId(carnetId));
-		System.out.println(" *************************** "+ "carnetId" +" *************************** ");
 	} 
 }

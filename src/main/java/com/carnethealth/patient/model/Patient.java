@@ -43,6 +43,8 @@ public class Patient implements Serializable{
 	@CreationTimestamp
 	private Date registration_date;
 	
+	private String category;
+	
 	private String patient_status;
 	
 	@OneToOne(mappedBy = "patient", cascade = CascadeType.ALL, 
@@ -153,8 +155,8 @@ public class Patient implements Serializable{
 		this.registration_date = registration_date;
 		this.patient_status = patient_status;
 		this.address = address;
-		//this.emergencyContacts = emergencyContacts;
-		//this.passwordRecovery = passwordRecovery;
+		this.emergencyContacts = emergencyContacts;
+		this.passwordRecovery = passwordRecovery;
 	}
 	
 	public Patient(Long id, String carnetId, String firstName, String lastName, String email, Date birthdate,
@@ -174,9 +176,9 @@ public class Patient implements Serializable{
 		this.registration_date = registration_date;
 		this.patient_status = patient_status;
 		this.address = address;
-		//this.emergencyContacts = emergencyContacts;
-		//this.passwordRecovery = passwordRecovery;
-		//this.loginCredentials = loginCredentials;
+		this.emergencyContacts = emergencyContacts;
+		this.passwordRecovery = passwordRecovery;
+		this.loginCredentials = loginCredentials;
 	}
 
 	/**
@@ -494,5 +496,14 @@ public class Patient implements Serializable{
 		this.loginCredentials = loginCredentials;
 	}
 	
-	
+	@GraphQLQuery(name = "category")
+	public String getCategory() {
+		return category;
+	}
+	/**
+	 * @param category the category to set
+	 */
+	public void setCategory(String category) {
+		this.category = category;
+	}
 }

@@ -1,5 +1,6 @@
 package com.carnethealth.patient.carnetid;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -15,8 +16,7 @@ import javax.persistence.Table;
 import io.leangen.graphql.annotations.GraphQLQuery;
 
 @Entity
-@Table(name = "cn_holders_type")
-public class CnHoldersType {
+public class CnHoldersType implements Serializable{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -25,7 +25,7 @@ public class CnHoldersType {
 	@Column(name = "cn_holder_type")
 	private String cn_holder_type ;
 	
-	private String cn_holde_definition;
+	private String cnHoldeDefinition;
 	
 	 @OneToMany(cascade = CascadeType.ALL)
      @JoinColumn(name = "cn_holder_type", referencedColumnName = "cn_holder_type")
@@ -33,10 +33,10 @@ public class CnHoldersType {
 	
 	public CnHoldersType() {}
 	
-	public CnHoldersType(String cn_holder_type, String cn_holde_definition) {
+	public CnHoldersType(String cn_holder_type, String cnHoldeDefinition) {
 		super();
 		this.cn_holder_type = cn_holder_type;
-		this.cn_holde_definition = cn_holde_definition;
+		this.cnHoldeDefinition = cnHoldeDefinition;
 	}
 	
 	/**
@@ -68,32 +68,32 @@ public class CnHoldersType {
 		this.cn_holder_type = cn_holder_type;
 	}
 	/**
-	 * @return the cn_holde_definition
+	 * @return the cnHoldeDefinition
 	 */
 	//@GraphQLQuery(name = "cnHolderdefinition")
-	public String getCn_holde_definition() {
-		return cn_holde_definition;
+	public String getCnHoldeDefinition() {
+		return cnHoldeDefinition;
 	}
 	/**
-	 * @param cn_holde_definition the cn_holde_definition to set
+	 * @param cnHoldeDefinition the cnHoldeDefinition to set
 	 */
-	public void setCn_holde_definition(String cn_holde_definition) {
-		this.cn_holde_definition = cn_holde_definition;
+	public void setCnHoldeDefinition(String cnHoldeDefinition) {
+		this.cnHoldeDefinition = cnHoldeDefinition;
 	}
 
 	/**
 	 * @return the carnetIDGenerator
 	 */
-	//@GraphQLQuery(name = "carnetIDGenerators")
+	/*//@GraphQLQuery(name = "carnetIDGenerators")
 	public List<CarnetIDGenerator> getCarnetIDGenerator() {
 		return carnetIDGenerator;
 	}
 
-	/**
+	*//**
 	 * @param carnetIDGenerator the carnetIDGenerator to set
-	 */
+	 *//*
 	public void setCarnetIDGenerator(List<CarnetIDGenerator> carnetIDGenerator) {
 		this.carnetIDGenerator = carnetIDGenerator;
 	}
-
+*/
 }

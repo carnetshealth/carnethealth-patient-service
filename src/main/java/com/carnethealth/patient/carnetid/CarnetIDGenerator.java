@@ -1,5 +1,6 @@
 package com.carnethealth.patient.carnetid;
 
+import java.io.Serializable;
 import java.sql.Date;
 
 import javax.persistence.Column;
@@ -10,11 +11,13 @@ import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.CreationTimestamp;
+
 import io.leangen.graphql.annotations.GraphQLQuery;
 
 @Entity
 @Table(name = "carnet_id_generator")
-public class CarnetIDGenerator {
+public class CarnetIDGenerator implements Serializable{
 	
 	@Id
     @Column(name = "code_id")
@@ -25,24 +28,23 @@ public class CarnetIDGenerator {
 	@Column(name = "cn_holder_type")
 	private String cn_holder_type;
 	
+	@CreationTimestamp
 	private Date creation_date;
 	
 	private String country;
 	 
 	public CarnetIDGenerator() {}
 	
-	public CarnetIDGenerator(int id, String cn_holder_type, Date creation_date, String country) {
+	public CarnetIDGenerator(String cn_holder_type, String country) {
 		super();
-		this.id = id;
 		this.cn_holder_type = cn_holder_type;
-		this.creation_date = creation_date;
 		this.country = country;
 	}
 	
 	/**
 	 * @return the id
 	 */
-	//@GraphQLQuery(name = "codeId")
+	@GraphQLQuery(name = "codeId")
 	public long getId() {
 		return id;
 	}
@@ -57,7 +59,7 @@ public class CarnetIDGenerator {
 	/**
 	 * @return the cn_holder_type
 	 */
-	//@GraphQLQuery(name = "cnHolderType")
+	@GraphQLQuery(name = "cnHolderType")
 	public String getCn_holder_type() {
 		return cn_holder_type;
 	}
@@ -70,7 +72,7 @@ public class CarnetIDGenerator {
 	/**
 	 * @return the creation_date
 	 */
-	//@GraphQLQuery(name = "creationDate")
+	@GraphQLQuery(name = "creationDate")
 	public Date getCreation_date() {
 		return creation_date;
 	}
@@ -83,7 +85,7 @@ public class CarnetIDGenerator {
 	/**
 	 * @return the country
 	 */
-	//@GraphQLQuery(name = "country")
+	@GraphQLQuery(name = "country")
 	public String getCountry() {
 		return country;
 	}

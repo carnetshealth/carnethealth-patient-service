@@ -41,9 +41,14 @@ public class PatientQuery {
     	return patientService.getPatientByCarnetId(carnetId);
     }
     
+    /* Example of inseting new id mutation {
+    	  createPatient(patient: {firstName: "loupo", lastName: "tony", phoneNumber: "234-56-7890", category: "PATIENT", email: "email@gmail.com", nationalIdNumber: "CM1009283", patientStatus: "actif", guardianNin: "CM13435598", address: {street: "nkomo", city: "yaounde", regionState: "centre", country: "CMR"}, emergencyContacts: {emFirstName: "pierre", emLastName: "paul", emPhoneNumber: "345-567-9012"}}) {
+    	    firstName  lastName  carnetId birthDate  phoneNumber category email nationalIdNumber patientStatus guardianNin registrationDate
+    	    address { street city regionState country
+    	    } emergencyContacts { emFirstName emLastName  emPhoneNumber }  } }*/
+    
     @GraphQLMutation(name = "createPatient")
-    public Patient createPatient(@GraphQLArgument(name = "carnetId") Patient patient){    
-      	
+    public Patient createPatient(@GraphQLArgument(name = "patient") Patient patient){          	
     	return patientService.createPatient(patient);
       }
 

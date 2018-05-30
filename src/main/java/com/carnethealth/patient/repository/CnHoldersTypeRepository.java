@@ -7,5 +7,6 @@ import com.carnethealth.patient.carnetid.CnHoldersType;
 
 @Repository
 public interface CnHoldersTypeRepository extends JpaRepository<CnHoldersType, Long> {
-
+	
+	CnHoldersType findAllByCnHoldeDefinition(String cnHoldeDefinition);
 }
